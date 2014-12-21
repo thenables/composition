@@ -64,7 +64,12 @@ memo(Wrap.prototype, '_generator', function () {
  * TODO: try to avoid using a generator function for this.
  */
 
+var loggedDeprecationMessage = false;
 function* promiseToGenerator(promise) {
+  if (!loggedDeprecationMessage) {
+    console.error('A promise was converted into a generator, which is an anti-pattern. Please avoid using `yield* next`!')
+    loggedDeprecationMessage = true;
+  }
   return yield Promise.resolve(promise);
 }
 
