@@ -13,10 +13,13 @@
   "devDependencies": {
     "bluebird": "^2.3.11",
     "istanbul-harmony": "0",
+    "koa-compose": "^2.3.0",
+    "matcha": "^0.6.0",
     "mocha": "2",
     "timeout-then": "^1.0.0"
   },
   "scripts": {
+    "bench": "matcha bench/run.js",
     "test": "mocha --harmony-generators --reporter spec",
     "test-cov": "node --harmony-generators node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- --reporter dot",
     "test-travis": "node --harmony-generators node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha --report lcovonly -- --reporter dot"
