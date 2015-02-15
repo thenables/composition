@@ -29,7 +29,7 @@ stack.push(function (next) {
 });
 
 // async/await functions
-stack.push(function async (next) {
+stack.push(async function (next) {
   return await Promise.resolve(true);
 });
 
