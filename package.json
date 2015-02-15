@@ -20,7 +20,7 @@
   },
   "scripts": {
     "bench": "matcha bench/run.js",
-    "test": "mocha",
+    "test": "mocha --bail",
     "test-cov": "istanbul cover ./node_modules/.bin/_mocha -- --reporter dot",
     "test-travis": "istanbul cover ./node_modules/.bin/_mocha --report lcovonly -- --reporter dot"
   },

@@ -30,6 +30,8 @@ function Wrap(fn, ctx, next) {
 
 /**
  * Lazily call the function.
+ * Note that if it's not an async or generator function,
+ * throws may mess things up.
  */
 
 memo(Wrap.prototype, '_value', function () {
