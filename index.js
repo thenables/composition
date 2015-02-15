@@ -61,6 +61,17 @@ memo(Wrap.prototype, '_generator', function () {
 })
 
 /**
+ * In later version of v8,
+ * `yield*` works on the `[@@iterator]` method.
+ */
+
+if (typeof Symbol !== 'undefined') {
+  Wrap.prototype[Symbol.iterator] = function () {
+    return this._generator
+  }
+}
+
+/**
  * This creates a generator from a promise or a value.
  *
  * TODO: try to avoid using a generator function for this.

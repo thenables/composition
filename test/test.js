@@ -3,7 +3,7 @@ var assert = require('assert');
 
 var compose = require('..');
 
-it.skip('should support delegating-yielding a promise', function () {
+it('should support delegating-yielding a promise', function () {
   var stack = []
 
   stack.push(function* (next) {
@@ -19,7 +19,7 @@ it.skip('should support delegating-yielding a promise', function () {
   })
 })
 
-it.skip('should support delegating-yielding a random value', function () {
+it('should support delegating-yielding a random value', function () {
   var stack = []
 
   stack.push(function* (next) {
