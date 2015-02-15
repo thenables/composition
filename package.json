@@ -20,9 +20,9 @@
   },
   "scripts": {
     "bench": "matcha bench/run.js",
-    "test": "mocha --harmony-generators --reporter spec",
-    "test-cov": "node --harmony-generators node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- --reporter dot",
-    "test-travis": "node --harmony-generators node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha --report lcovonly -- --reporter dot"
+    "test": "mocha",
+    "test-cov": "istanbul cover ./node_modules/.bin/_mocha -- --reporter dot",
+    "test-travis": "istanbul cover ./node_modules/.bin/_mocha --report lcovonly -- --reporter dot"
   },
   "keywords": [
     "co",

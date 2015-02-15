@@ -1,5 +1,4 @@
 node_js:
-- "0.12"
 - "iojs"
 language: node_js
 script: "npm run-script test-travis"
