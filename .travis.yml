@@ -1,5 +1,7 @@
 node_js:
-- "iojs"
+- "1"
+- "2"
+sudo : false
 language: node_js
 script: "npm run-script test-travis"
 after_script: "npm install coveralls@2 && cat ./coverage/lcov.info | coveralls"
