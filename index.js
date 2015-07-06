@@ -19,6 +19,10 @@ function compose(middleware) {
 /**
  * Wrap a function, then lazily call it,
  * always returning both a promise and a generator.
+ *
+ * @param {Function} fn
+ * @param {Object} ctx
+ * @param {Wrap} next
  */
 
 function Wrap(fn, ctx, next) {
@@ -32,6 +36,8 @@ function Wrap(fn, ctx, next) {
  * Lazily call the function.
  * Note that if it's not an async or generator function,
  * throws may mess things up.
+ *
+ * @returns {Mixed}
  */
 
 memo(Wrap.prototype, '_value', function () {
@@ -40,6 +46,8 @@ memo(Wrap.prototype, '_value', function () {
 
 /**
  * Lazily create a promise from the return value.
+ *
+ * @returns {Promise}
  */
 
 memo(Wrap.prototype, '_promise', function () {
@@ -51,6 +59,8 @@ memo(Wrap.prototype, '_promise', function () {
 
 /**
  * Lazily create a generator from the return value.
+ *
+ * @returns {Iterator}
  */
 
 memo(Wrap.prototype, '_generator', function () {
@@ -63,6 +73,8 @@ memo(Wrap.prototype, '_generator', function () {
 /**
  * In later version of v8,
  * `yield*` works on the `[@@iterator]` method.
+ *
+ * @returns {Iterator}
  */
 
 if (typeof Symbol !== 'undefined') {
@@ -75,6 +87,8 @@ if (typeof Symbol !== 'undefined') {
  * This creates a generator from a promise or a value.
  *
  * TODO: try to avoid using a generator function for this.
+ *
+ * @returns {Iterator}
  */
 
 var loggedDeprecationMessage = false;
@@ -111,7 +125,6 @@ Wrap.prototype.throw = function (err) {
  *
  * @param {Mixed} obj
  * @return {Boolean}
- * @api private
  */
 
 function isGenerator(obj) {
