@@ -7,7 +7,6 @@
 [![Dependency Status][david-image]][david-url]
 [![License][license-image]][license-url]
 [![Downloads][downloads-image]][downloads-url]
-[![Gittip][gittip-image]][gittip-url]
 
 Compose generator and async/await middleware like koa.
 Allows to use both generator functions and async/await functions.
@@ -61,5 +60,3 @@ fn.call(this).then(function (val) {
 [license-url]: LICENSE
 [downloads-image]: http://img.shields.io/npm/dm/composition.svg?style=flat-square
 [downloads-url]: https://npmjs.org/package/composition
-[gittip-image]: https://img.shields.io/gratipay/jonathanong.svg?style=flat-square
-[gittip-url]: https://gratipay.com/jonathanong/
