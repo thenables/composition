@@ -15,8 +15,6 @@ function compose(middleware) {
   }
 }
 
-var INIT_VALUE = {}
-
 /**
  * Wrap a function, then lazily call it,
  * always returning both a promise and a generator.
@@ -31,9 +29,10 @@ function Wrap(fn, ctx, next) {
   this._fn = fn;
   this._ctx = ctx;
   this._next = next;
-  this._value = INIT_VALUE;
-  this._promise = INIT_VALUE;
-  this._generator = INIT_VALUE;
+  this._called = false;
+  this._value = undefined;
+  this._promise = undefined;
+  this._generator = undefined;
 }
 
 /**
@@ -44,11 +43,12 @@ function Wrap(fn, ctx, next) {
  */
 
 Wrap.prototype._getValue = function () {
-  if (this._value === INIT_VALUE) {
+  if (!this._called) {
+    this._called = true;
     try {
-      this._value = this._fn.call(this._ctx, this._next)
+      this._value = this._fn.call(this._ctx, this._next);
     } catch (e) {
-      this._value = Promise.reject(e)
+      this._value = Promise.reject(e);
     }
   }
   return this._value
@@ -61,7 +61,7 @@ Wrap.prototype._getValue = function () {
  */
 
 Wrap.prototype._getPromise = function () {
-  if (this._promise === INIT_VALUE) {
+  if (this._promise === undefined) {
     var value = this._getValue();
     this._promise = isGenerator(value)
       ? co.call(this._ctx, value)
@@ -77,7 +77,7 @@ Wrap.prototype._getPromise = function () {
  */
 
 Wrap.prototype._getGenerator = function () {
-  if (this._generator === INIT_VALUE) {
+  if (this._generator === undefined) {
     var value = this._getValue();
     this._generator = isGenerator(value)
       ? value
