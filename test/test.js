@@ -35,6 +35,25 @@ it('should support delegating-yielding a random value', function () {
   })
 })
 
+it('should support return another wrap', function (done) {
+  var i = 0
+  var stack = [
+    function (next) {
+      i++;
+      return next
+    },
+    function (next) {
+      i++;
+      return next
+    }
+  ]
+
+  return compose(stack)().then(function () {
+    assert.equal(i, 2)
+    done()
+  })
+})
+
 it('should support an empty array', function () {
   return compose([])().then(function () {
 
