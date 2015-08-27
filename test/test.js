@@ -40,3 +40,9 @@ it('should support an empty array', function () {
 
   })
 })
+
+it('should support .catch()', function () {
+  return compose([])().catch(function () {
+
+  })
+})
