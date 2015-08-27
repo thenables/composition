@@ -1,6 +1,5 @@
 
 var Promise = require('native-or-bluebird');
-var memo = require('memorizer');
 var co = require('co');
 
 module.exports = compose;
@@ -40,9 +39,9 @@ function Wrap(fn, ctx, next) {
  * @returns {Mixed}
  */
 
-memo(Wrap.prototype, '_value', function () {
+Wrap.prototype._getValue = function () {
   return this._fn.call(this._ctx, this._next);
-});
+};
 
 /**
  * Lazily create a promise from the return value.
@@ -50,12 +49,12 @@ memo(Wrap.prototype, '_value', function () {
  * @returns {Promise}
  */
 
-memo(Wrap.prototype, '_promise', function () {
-  var value = this._value;
+Wrap.prototype._getPromise = function () {
+  var value = this._getValue();
   return isGenerator(value)
     ? co.call(this._ctx, value)
     : Promise.resolve(value);
-})
+}
 
 /**
  * Lazily create a generator from the return value.
@@ -63,12 +62,12 @@ memo(Wrap.prototype, '_promise', function () {
  * @returns {Iterator}
  */
 
-memo(Wrap.prototype, '_generator', function () {
-  var value = this._value;
+Wrap.prototype._getGenerator = function () {
+  var value = this._getValue();
   return isGenerator(value)
     ? value
     : promiseToGenerator.call(this._ctx, value);
-})
+}
 
 /**
  * In later version of v8,
@@ -79,7 +78,7 @@ memo(Wrap.prototype, '_generator', function () {
 
 if (typeof Symbol !== 'undefined') {
   Wrap.prototype[Symbol.iterator] = function () {
-    return this._generator
+    return this._getGenerator();
   }
 }
 
@@ -105,19 +104,19 @@ function* promiseToGenerator(promise) {
  */
 
 Wrap.prototype.then = function (resolve, reject) {
-  return this._promise.then(resolve, reject);
+  return this._getPromise().then(resolve, reject);
 }
 
 Wrap.prototype.catch = function (reject) {
-  return this._promise.catch(reject);
+  return this._getPromise().catch(reject);
 }
 
 Wrap.prototype.next = function (val) {
-  return this._generator.next(val);
+  return this._getGenerator().next(val);
 }
 
 Wrap.prototype.throw = function (err) {
-  return this._generator.throw(err);
+  return this._getGenerator().throw(err);
 }
 
 /**
