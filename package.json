@@ -13,7 +13,7 @@
     "bluebird": "^3.1.1",
     "istanbul-harmony": "0",
     "koa-compose": "^2.3.0",
-    "matcha": "^0.6.0",
+    "matcha": "^0.6.1",
     "mocha": "2",
     "timeout-then": "^1.0.0"
   },
