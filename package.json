@@ -11,10 +11,10 @@
   },
   "devDependencies": {
     "bluebird": "^3.1.1",
-    "istanbul-harmony": "0",
+    "istanbul": "^0.4.2",
     "koa-compose": "^2.3.0",
     "matcha": "^0.6.0",
-    "mocha": "2",
+    "mocha": "^2.0.0",
     "timeout-then": "^1.0.0"
   },
   "scripts": {
