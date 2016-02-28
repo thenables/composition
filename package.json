@@ -6,8 +6,8 @@
   "license": "MIT",
   "repository": "thenables/composition",
   "dependencies": {
-    "co": "^4.0.2",
-    "native-or-bluebird": "^1.1.2"
+    "any-promise": "^1.1.0",
+    "co": "^4.0.2"
   },
   "devDependencies": {
     "bluebird": "^3.1.1",

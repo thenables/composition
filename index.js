@@ -1,5 +1,5 @@
 
-var Promise = require('native-or-bluebird');
+var Promise = require('any-promise');
 var co = require('co');
 
 module.exports = compose;
