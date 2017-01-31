@@ -6,6 +6,13 @@ module.exports = compose;
 
 compose.Wrap = Wrap;
 
+/**
+ * Compose middleware
+ *
+ * @param {Array} middleware
+ * @returns {Function}
+ */
+
 function compose(middleware) {
   return function (next) {
     next = next || new Wrap(noop);
